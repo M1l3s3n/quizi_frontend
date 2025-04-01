@@ -1,0 +1,209 @@
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  background-color: black;
+  overflow: hidden;
+}
+
+.image_box {
+  width: 35vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.loginImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.form_container {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(255, 254, 254);
+}
+
+.logo_box {
+  position: absolute;
+  top: 0.75vh;
+  left: 2vw;
+  font-family: "Alkalami", sans-serif;
+}
+
+.logo_name {
+  margin: 0;
+  font-size: 6vh;
+}
+
+.wrapper {
+  position: relative;
+  width: 40vw;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.45);
+  border-radius: 0.3vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* background: rgba(255, 255, 255, 0.3); */
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  border: none;
+}
+
+.form_box {
+  position: relative;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  color: #000000;
+  transition: transform 0.2s ease, opacity 0.2s ease, visibility 0.2s ease;
+}
+
+#logForm,
+#regForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 75%;
+  height: 65%;
+}
+
+.form_box h2 {
+  display: flex;
+  top: 1.3vh;
+  left: 2.6vw;
+  width: auto;
+  margin: 0;
+  padding-left: 2vw;
+  text-align: center;
+  align-self: flex-start;
+  font-size: 4.5vh;
+}
+
+input {
+  width: 100%;
+  padding: 1vh;
+  margin: 1vh 0;
+  border: none;
+  border-bottom: 1px solid #000;
+  background: transparent;
+  font-size: 2.1vh;
+}
+
+input:focus {
+  outline: none;
+}
+
+.customInput::placeholder {
+  opacity: 1;
+  transition: opacity 0.45s ease-in-out;
+}
+
+.customInput:focus::placeholder {
+  opacity: 0;
+}
+
+.block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* button {
+  width: 6vw;
+  height: 4vh;
+  font-size: 20px;
+  border: none;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  margin-top: 9px;
+} */
+
+.submitBtn {
+  width: 10vw;
+  height: 4vh;
+  font-size: 2vh;
+  border: none;
+  background-color: rgba(38, 137, 230, 1);
+  color: white;
+  border-radius: 1.5vh;
+  cursor: pointer;
+  margin-top: 1vh;
+}
+
+.signupBtn,
+.loginBtn {
+  width: 5vw;
+  height: 3.7vh;
+  font-family: "Crimson Text", serif;
+  font-size: 1.8vh;
+  border: none;
+  background-color: rgb(253, 253, 253);
+  border-radius: 0.5vh;
+  cursor: pointer;
+  margin-top: 3vh;
+}
+
+.signupBtn:hover,
+.loginBtn:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+.signup_link,
+.login_link {
+  font-family: "Crimson Text", serif;
+  font-size: 1.8vh;
+  text-align: center;
+}
+
+.signup_link a,
+.login_link a {
+  font-size: 15px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.wrapper .signup {
+  position: absolute;
+  transform: translateX(100%);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrapper .login {
+  transform: translateX(0);
+}
+
+.active .login {
+  transform: translateX(-100%);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.active .signup {
+  transform: translateX(0);
+  visibility: visible;
+  opacity: 1;
+}

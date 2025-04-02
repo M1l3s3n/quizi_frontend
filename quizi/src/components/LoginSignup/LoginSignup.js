@@ -11,13 +11,9 @@ const LoginSignup = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const response = await authService.handle_login(username, password);
-      if (response) {
-        navigate("/home");
-      }
-    } catch (error) {
-      console.error("error:", error);
+    const response = await authService.handle_login(username, password);
+    if (response) {
+      navigate("/home");
     }
   };
 
@@ -33,6 +29,7 @@ const LoginSignup = () => {
     }
   };
 
+
   const signupLink = () => {
     setAction("active");
   };
@@ -40,6 +37,7 @@ const LoginSignup = () => {
   const loginLink = () => {
     setAction("");
   };
+
 
   return (
     <div className="container">

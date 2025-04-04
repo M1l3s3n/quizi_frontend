@@ -8,8 +8,20 @@ class Auth_Service {
     const payload = { username, password };
 
     try {
-      const response = await axios.post(`${base_url}/login`, payload);
+      const response = await axios.post(base_url + "/login", payload);
+      console.log("Login response data:", response.data);
+
+      const user_id = response.data.user_SID; 
+
+      if (!user_id) {
+        throw new Error("User ID is undefined");
+      }
+
+      alert(`User ID: ${user_id}`);
+      save_user_id(user_id);
+
       return { message: "Login successful", data: response.data };
+
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
@@ -36,22 +48,30 @@ class Auth_Service {
 
     try {
       const response = await axios.post(base_url + "/signup", payload);
-      if (response.status === 200) {
-        const user_id = response.data.user_id;
+      if (response.status === 201) {
+        const user_id = response.data.user_SID;
         save_user_id(user_id);
+        alert(`user id ${user_id}`);
         return { message: "Signup successful", data: response.data };
       }
+
+
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        alert('Username already exists.');
-        return null;
+      if (error.response) {
+        const { status, data } = error.response;
+
+        console.log(`Error ${status}:`, data);
+
+        if (status === 400) {
+          alert(data.message || "Invalid credentials");
+        } else {
+          alert(`Error ${status}: ${data.detail || "An error occurred"}`);
+        }
       } else {
-        alert('An unexpected error occurred.');
-        console.error("Error:", error);
-        return null;
+        alert(`Unexpected error: ${error.message}`);
       }
     }
-    
+
   }
 
 

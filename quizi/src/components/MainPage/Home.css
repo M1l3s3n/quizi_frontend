@@ -1,0 +1,183 @@
+.home_container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  background-color: black;
+  /* overflow: hidden; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 100vw;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.logo {
+  font-family: "Alkalami", sans-serif;
+  font-size: 5vh;
+  margin-left: 2vw;
+  margin-top: 0.9vw;
+  margin-right: 5vw;
+}
+
+.registered_section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
+.search_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 4vh;
+  width: 35vw;
+}
+
+.search_input {
+  width: 31.5vw;
+  border: none;
+  margin: 0;
+  padding: 0.75vh;
+  padding-top: 0.8vh;
+  padding-bottom: 0.8vh;
+}
+
+.search_button {
+  width: 2vw;
+  height: 3vh;
+  padding: 0;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search_button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.userControls {
+  display: flex;
+}
+
+.addNewQuiz {
+  width: 2vw;
+  height: 4vh;
+  border: none;
+  border-radius: 1vh;
+  background-color: rgba(65, 81, 248, 1);
+  color: white;
+  font-size: 2vh;
+  cursor: pointer;
+}
+
+.userCabinet {
+  margin-left: 0.5vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-size: 2.2vh;
+  font-family: "Crimson Text", serif;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.mainQuizes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+  background-color: white;
+}
+
+.titleQuizes {
+  border-bottom: 1px solid black;
+  width: 25vw;
+  text-align: center;
+  font-family: "Crimson Text", serif;
+  font-size: 4vh;
+}
+
+.containerQuizes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 80%;
+  overflow-y: auto;
+}
+
+.quizCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 23vw;
+  height: 20vh;
+  margin: 0 1vw;
+  padding-left: 1.5vw;
+  padding-right: 0.5vw;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  font-size: 2.5vh;
+  cursor: pointer;
+}
+
+.quizTitle {
+  font-size: 2vh;
+  font-family: "Crimson Text", serif;
+}
+
+.quizQuestionNumber {
+  font-size: 1.5vh;
+  font-family: "Crimson Text", serif;
+  background-color: rgba(238, 238, 238, 1);
+  padding: 0.3vh 1.75vh;
+  border-radius: 1.2vh;
+}
+
+.authorStartBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 1vh;
+  font-family: "Crimson Text", serif;
+}
+
+.quizAuthor {
+  font-size: 1.5vh;
+}
+
+.startButton {
+  width: 4vw;
+  height: 3vh;
+  border: 1px solid black;
+  border-radius: 2vh;
+  background-color: rgba(65, 81, 248, 1);
+  color: white;
+  font-size: 1.4vh;
+  cursor: pointer;
+  font-family: "Crimson Text", serif;
+}

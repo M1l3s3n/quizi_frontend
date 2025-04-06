@@ -30,7 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: rgb(255, 254, 254);
 }
 
@@ -129,16 +129,6 @@ input:focus {
   align-items: center;
   justify-content: center;
 }
-
-/* button {
-  width: 6vw;
-  height: 4vh;
-  font-size: 20px;
-  border: none;
-  border-radius: 0.5vh;
-  cursor: pointer;
-  margin-top: 9px;
-} */
 
 .submitBtn {
   width: 10vw;

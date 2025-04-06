@@ -1,7 +1,7 @@
 import axios from "axios";
 import { get_user_id, save_user_id } from "./cache";
 
-const base_url = "http://localhost:8000/usr/";
+const base_url = "http://localhost:8000/usr";
 
 class Auth_Service {
   async handle_login(username, password) {
@@ -34,10 +34,6 @@ class Auth_Service {
       return null;
     }
   }
-
-
-
-
 }
 
 const authService = new Auth_Service();

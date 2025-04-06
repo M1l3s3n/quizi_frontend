@@ -1,4 +1,5 @@
- 
+
+/////////////////////////////////////////////////////////// AUTH JS   
       IF @user_service.get("/user_info/{user_id}") IS ACTIVE ON BACKEND  (LOOK IN VIEWS.PY OR CONTACT DANIEL_KAISER)
 
   async get_user_info() {
@@ -57,3 +58,45 @@
       }
     }
   }
+
+
+
+////////////////////////////////// HOME JS
+
+import authService from "../../services/auth";
+
+
+  const Home = () => {
+
+ *PLACE THE NEXT CODE SNIPPET AFTER CONST HOME ABOVE*
+
+const [curUsername, setCurUsername] = useState("");
+const set_username = async () => {
+    try {
+
+        const response = await authService.get_user_info();
+        if (response.success) {
+
+            setCurUsername(response.data.username);
+        }
+    } catch (error) {
+        console.error("error:", error);
+    }
+};
+
+ *PLACE THE FOLLOWING CODE SNIPPET BEFORE THE RETURN(WITH PAGE HTML)*
+
+    useEffect(() => {
+    const fetchUsername = async () => {
+        await set_username();
+    };
+
+    fetchUsername();
+}, []);
+
+ return(
+
+
+             NOW U CAN USE    {curUsername}    INSTEAD OF NICKNAME TEXT
+              EXAMPLE:            <div>{curUsername}</div>
+

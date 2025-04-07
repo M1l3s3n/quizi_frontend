@@ -10,8 +10,8 @@ class Auth_Service {
     try {
       const response = await axios.post(base_url + "/login", payload);
       //alert(`type: ${typeof response.data}, data: ${response.data}`)
-      const parsed_data=JSON.parse(response.data)
-      const user_id = parsed_data["user_SID"];
+      //const parsed_data=JSON.parse(response.data)
+      const user_id = response.data["user_SID"];
 
       if (!user_id) {
         throw new Error("User ID is undefined");

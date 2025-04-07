@@ -2,11 +2,22 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 // import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import authService from "../../services/auth";
+import authService from "../../services/auth";
 
 const Home = () => {
-  const navigate = useNavigate();
+  const [curUsername, setCurUsername] = useState("");
+  const set_username = async () => {
+    try {
+      const response = await authService.get_user_info();
+      if (response.success) {
+        setCurUsername(response.data.username);
+      }
+    } catch (error) {
+      console.error("error:", error);
+    }
+  };
 
+  const navigate = useNavigate();
   const fakeQuizzes = [
     {
       id: 1,
@@ -78,6 +89,14 @@ const Home = () => {
     return colors[randomIndex]; // Повертаємо випадковий колір
   };
 
+  useEffect(() => {
+    const fetchUsername = async () => {
+      await set_username();
+    };
+
+    fetchUsername();
+  }, []);
+
   return (
     <div className="home_container">
       <div className="header">
@@ -93,8 +112,15 @@ const Home = () => {
           </button>
         </div>
         <div className="userControls">
-          <button className="addNewQuiz">+</button>
-          <button className="userCabinet">UserNickname</button>
+          <button
+            className="addNewQuiz"
+            onClick={() => navigate("/create_quiz")}
+          >
+            +
+          </button>
+          <button className="userCabinet">
+            {curUsername || "Завантаження..."}
+          </button>
         </div>
       </div>
       <div className="mainQuizes">

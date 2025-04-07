@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Creater.css";
+import { useNavigate } from "react-router-dom";
 import QuestionEditor from "./QuestionEditor.jsx";
+import authService from "../../services/auth";
 
 function Creater() {
+  const [curUsername, setCurUsername] = useState("");
+  const set_username = async () => {
+    try {
+      const response = await authService.get_user_info();
+      if (response.success) {
+        setCurUsername(response.data.username);
+      }
+    } catch (error) {
+      console.error("error:", error);
+    }
+  };
+
+  const navigate = useNavigate();
+
   const searchIcon = `${process.env.PUBLIC_URL}/images/search.png`;
   const [testIntroduction, setTestIntroduction] = useState("");
   const [isIntroEditing, setIsIntroEditing] = useState(false);
@@ -67,17 +83,33 @@ function Creater() {
     setEditingQuestionId(null);
   };
 
+  useEffect(() => {
+    const fetchUsername = async () => {
+      await set_username();
+    };
+
+    fetchUsername();
+  }, []);
+
   return (
     <div className="app">
       <header className="header">
-        <h1 className="logo">Quizi</h1>
-        <div className="search-container">
-          <input type="text" className="search-input" placeholder="Search..." />
-          <span className="search-icon">
+        <h1
+          className="logo"
+          onClick={() => navigate("/home")}
+          style={{ cursor: "pointer" }}
+        >
+          Quizi
+        </h1>
+        <div className="search_container">
+          <input type="text" className="search_input" placeholder="Пошук" />
+          <span className="search_button">
             <img src={searchIcon} alt="Search" />
           </span>
         </div>
-        <div className="author">Author</div>
+        <div className="userCabinetCreater">
+          {curUsername || "Завантаження..."}
+        </div>
       </header>
 
       <main className="content">

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Creater.css";
-import searchIcon from "../images/search.svg";
 import QuestionEditor from "./QuestionEditor.jsx";
 
-function App() {
+function Creater() {
+  const searchIcon = `${process.env.PUBLIC_URL}/images/search.png`;
   const [testIntroduction, setTestIntroduction] = useState("");
   const [isIntroEditing, setIsIntroEditing] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -187,4 +187,4 @@ function App() {
   );
 }
 
-export default App;
+export default Creater;

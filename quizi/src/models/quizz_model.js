@@ -1,10 +1,12 @@
+import { get_user_id } from "../services/cache";
+
 //add here models for quizz, choices, question and static method fromJSON() and toJSON()
 class Quizz {
   constructor(quizz_SID, title, quizz_password, author_SID) {
     this.quizz_SID = quizz_SID;
     this.title = title;
     this.quizz_password = quizz_password;
-    this.author_SID = author_SID;
+    this.author_SID = get_user_id();
   }
 
   static fromJSON(json) {

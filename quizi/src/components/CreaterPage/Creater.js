@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Creater.css";
 import { useNavigate } from "react-router-dom";
 import QuestionEditor from "./QuestionEditor.jsx";
 import authService from "../../services/auth";
+import { get_user_id } from "../../services/cache";
 
 function Creater() {
   const [curUsername, setCurUsername] = useState("");
@@ -14,6 +16,66 @@ function Creater() {
       }
     } catch (error) {
       console.error("error:", error);
+    }
+  };
+
+  const base_url = "http://localhost:8000/quizz";
+
+  const handlePublishQuiz = async () => {
+    try {
+      const quizzPayload = {
+        title: testIntroduction,
+        quizz_password: "",
+        user_SID: get_user_id(),
+      };
+
+      const quizzResponse = await axios.post(
+        base_url + "/create_quizz",
+        quizzPayload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (quizzResponse.status === 201) {
+        const quizz_SID = quizzResponse.data.quizz_SID;
+
+        for (const question of questions) {
+          const questionPayload = {
+            quizz_SID: quizz_SID,
+            score: question.points,
+            title: question.text,
+            description: "Optional description",
+          };
+
+          const questionResponse = await axios.post(
+            base_url + "/create_question",
+            questionPayload
+          );
+
+          if (questionResponse.status === 201) {
+            const question_SID = questionResponse.data.question_SID;
+
+            for (const option of question.options) {
+              const optionPayload = {
+                question_SID: question_SID,
+                is_correct: option.isCorrect,
+                main: option.text,
+              };
+
+              await axios.post(base_url + "/create_option", optionPayload);
+            }
+          }
+        }
+
+        alert("Quiz published successfully!");
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error("Error:", error.response?.data);
+      alert("Failed to publish quiz. Please try again.");
     }
   };
 
@@ -133,7 +195,9 @@ function Creater() {
                 >
                   Add question
                 </button>
-                <button className="publish-btn">Publish</button>
+                <button className="publish-btn" onClick={handlePublishQuiz}>
+                  Publish
+                </button>
               </div>
             </div>
 

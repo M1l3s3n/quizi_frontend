@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Alkalami&family=Crimson+Text&display=swap");
 
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 body {
   font-family: "Crimson Text", serif;
@@ -18,52 +18,30 @@ body {
 }
 
 /* Header styles */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 57px;
-  padding: 0 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
-}
 
 .logo {
-  font-family: "Alkalami", serif;
-  font-size: 40px;
-  font-weight: normal;
-  margin-top: 15px;
+  font-family: "Alkalami", sans-serif;
+  font-weight: lighter;
+  font-size: 5vh;
+  margin-left: 2vw;
+  margin-top: 0.9vw;
+  margin-right: 5vw;
+  margin-bottom: 0;
 }
 
-.search-container {
-  position: relative;
-  width: 594px;
-  height: 30px;
-}
-
-.search-input {
-  width: 100%;
-  height: 100%;
-  border-radius: 14px;
-  border: 1px solid #ccc;
-  padding: 0 35px 0 15px;
+.userCabinetCreater {
+  margin-right: 0.5vw;
+  margin-left: 5.4vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  font-size: 2.2vh;
   font-family: "Crimson Text", serif;
-  font-size: 16px;
-}
-
-.search-icon {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
 }
 
-.author {
-  font-size: 24px;
-  font-weight: bold;
-}
+/* other header styles in Home.css */
 
 /* Content styles */
 .content {

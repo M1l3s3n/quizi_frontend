@@ -1,70 +1,41 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-// import axios from "axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-// import authService from "../../services/auth";
+import authService from "../../services/auth";
 
 const Home = () => {
+  const [curUsername, setCurUsername] = useState("");
+  const [quizzes, setQuizzes] = useState([]);
   const navigate = useNavigate();
 
-  const fakeQuizzes = [
-    {
-      id: 1,
-      title: "JavaScript Basics",
-      questions: [1, 2, 3],
-      author: "John Doe",
-    },
-    {
-      id: 2,
-      title: "React Fundamentals",
-      questions: [1, 2, 3, 4],
-      author: "Jane Smith",
-    },
-    {
-      id: 3,
-      title: "Node.js Mastery",
-      questions: [1, 2],
-      author: "Alex Brown",
-    },
-    {
-      id: 4,
-      title: "HTML & CSS",
-      questions: [1, 2, 3, 4, 5],
-      author: "Sarah Lee",
-    },
-    {
-      id: 5,
-      title: "Python for Beginners",
-      questions: [1, 2, 3, 4],
-      author: "Mike Ross",
-    },
-    {
-      id: 6,
-      title: "Machine Learning",
-      questions: [1, 2, 3],
-      author: "Anna White",
-    },
-    {
-      id: 7,
-      title: "Cybersecurity Basics",
-      questions: [1, 2, 3, 4],
-      author: "David Clark",
-    },
-    {
-      id: 8,
-      title: "SQL & Databases",
-      questions: [1, 2],
-      author: "Chris Martin",
-    },
-    {
-      id: 9,
-      title: "TypeScript Guide",
-      questions: [1, 2, 3, 4, 5],
-      author: "Emma Watson",
-    },
-  ];
+  const set_username = async () => {
+    try {
+      const response = await authService.get_user_info();
+      if (response.success) {
+        setCurUsername(response.data.username);
+      }
+    } catch (error) {
+      console.error("error:", error);
+    }
+  };
 
-  const [quizzes, setQuizzes] = useState(fakeQuizzes);
+  const base_url = "http://localhost:8000/quizz";
+  const fetchQuizzes = async () => {
+    try {
+      const response = await axios.get(base_url + "/fetch_quizz");
+      if (response.status === 200) {
+        const allQuizzes = response.data.array_of_quizzes;
+
+        const shuffledQuizzes = allQuizzes.sort(() => 0.5 - Math.random());
+        const selectedQuizzes = shuffledQuizzes.slice(0, 9);
+
+        setQuizzes(selectedQuizzes);
+      }
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+    }
+  };
 
   const colors = [
     "rgba(219, 164, 60, 1)", // колір 1
@@ -77,6 +48,19 @@ const Home = () => {
     const randomIndex = Math.floor(Math.random() * colors.length); // Вибираємо випадковий індекс
     return colors[randomIndex]; // Повертаємо випадковий колір
   };
+
+  const handleStartQuiz = (quizId) => {
+    navigate(`/quiz/${quizId}`);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await set_username();
+      await fetchQuizzes();
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="home_container">
@@ -93,21 +77,26 @@ const Home = () => {
           </button>
         </div>
         <div className="userControls">
-          <button className="addNewQuiz">+</button>
-          <button className="userCabinet">UserNickname</button>
+          <button
+            className="addNewQuiz"
+            onClick={() => navigate("/create_quiz")}
+          >
+            +
+          </button>
+          <button className="userCabinet">
+            {curUsername || "Завантаження..."}
+          </button>
         </div>
       </div>
       <div className="mainQuizes">
         <div className="titleQuizes">Quizzes</div>
         <div className="containerQuizes">
-          {quizzes.map((quiz) => (
-            <div key={quiz.id} className="quizCard">
-              <div className="quizTitle">{quiz.title}</div>
-              <div className="quizQuestionNumber">
-                {quiz.questions.length} питань
-              </div>
+          {quizzes.map((quizz) => (
+            <div key={quizz.quizz_id} className="quizCard">
+              <div className="quizTitle">{quizz.title}</div>
+              <div className="quizQuestionNumber">{quizz.questions} питань</div>
               <div className="authorStartBtn">
-                <div className="quizAuthor">{quiz.author}</div>
+                <div className="quizAuthor">{quizz.author}</div>
                 <button
                   className="startButton"
                   style={{ backgroundColor: getRandomColor() }}

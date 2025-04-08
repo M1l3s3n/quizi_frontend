@@ -10,6 +10,7 @@
 }
 
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,21 +29,17 @@
   margin-right: 5vw;
 }
 
-.registered_section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  flex: 1;
-}
-
 .search_container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid black;
   border-radius: 4vh;
   width: 35vw;
+  margin: auto;
 }
 
 .search_input {

@@ -21,7 +21,6 @@ class Auth_Service {
       save_user_id(user_id);
 
       return { message: "Login successful", data: response.data };
-
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
@@ -39,7 +38,6 @@ class Auth_Service {
     }
   }
 
-
   async handle_signup(username, password) {
     const payload = {
       username: username,
@@ -54,8 +52,6 @@ class Auth_Service {
         //alert(`user id ${user_id}`);
         return { message: "Signup successful", data: response.data };
       }
-
-
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
@@ -71,9 +67,62 @@ class Auth_Service {
         alert(`Unexpected error: ${error.message}`);
       }
     }
+  }
+  async get_user_info() {
+    try {
+      const user_id = get_user_id();
+      //console.log('User ID:', user_id);
 
+      const response = await axios.post(base_url + "/get_user_info", {
+        user_SID: user_id,
+      });
+
+      if (response.status === 200) {
+        console.log("User info retrieved:", response.data);
+        return { success: true, data: response.data };
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          alert("User not found.");
+          return { success: false, message: "User not found." };
+        }
+        alert("An unexpected error occurred.");
+        return { success: false, message: "An error occurred." };
+      } else {
+        console.error("Error fetching user info:", error);
+        return { success: false, message: "Network error." };
+      }
+    }
   }
 
+  async get_user_info() {
+    try {
+      const user_id = get_user_id();
+      //console.log('User ID:', user_id);
+
+      const response = await axios.post(base_url + "/get_user_info", {
+        user_SID: user_id,
+      });
+
+      if (response.status === 200) {
+        console.log("User info retrieved:", response.data);
+        return { success: true, data: response.data };
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          alert("User not found.");
+          return { success: false, message: "User not found." };
+        }
+        alert("An unexpected error occurred.");
+        return { success: false, message: "An error occurred." };
+      } else {
+        console.error("Error fetching user info:", error);
+        return { success: false, message: "Network error." };
+      }
+    }
+  }
 }
 
 const authService = new Auth_Service();

@@ -27,7 +27,27 @@ const Home = () => {
       if (response.status === 200) {
         const allQuizzes = response.data.array_of_quizzes;
 
-        const shuffledQuizzes = allQuizzes.sort(() => 0.5 - Math.random());
+        const quizzesWithAuthors = await Promise.all(
+          allQuizzes.map(async (quiz) => {
+            try {
+              const userInfo = await authService.get_user_info(quiz.author);
+              const username = userInfo.success
+                ? userInfo.data.username
+                : "Невідомий";
+              return { ...quiz, author: username };
+            } catch (error) {
+              console.error(
+                `Error fetching author info for SID ${quiz.author}:`,
+                error
+              );
+              return { ...quiz, author: "Невідомий" };
+            }
+          })
+        );
+
+        const shuffledQuizzes = quizzesWithAuthors.sort(
+          () => 0.5 - Math.random()
+        );
         const selectedQuizzes = shuffledQuizzes.slice(0, 9);
 
         setQuizzes(selectedQuizzes);

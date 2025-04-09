@@ -29,7 +29,6 @@ const LoginSignup = () => {
     }
   };
 
-
   const signupLink = () => {
     setAction("active");
   };
@@ -37,7 +36,6 @@ const LoginSignup = () => {
   const loginLink = () => {
     setAction("");
   };
-
 
   return (
     <div className="container">
